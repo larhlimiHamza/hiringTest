@@ -1,0 +1,15 @@
+<mat-toolbar >
+  <button mat-icon-button color="primary" aria-label="Home" class="home-btn">
+    <mat-icon>home</mat-icon>
+  </button>
+  <div style="margin-left: auto;">
+  <div  *ngIf="!isLogged;else sign_out">
+    <a mat-button [routerLink]="['../auth']" color="primary">Sign in</a>
+    <a mat-button [routerLink]="['../sign_up']" color="accent">Sign up</a>
+  </div>
+  <ng-template style="margin-left: auto;" #sign_out>
+    <a mat-raised-button color="primary" (click)="firebaseService.signOut()">Sign Out</a>
+  </ng-template>
+  </div>
+
+</mat-toolbar>

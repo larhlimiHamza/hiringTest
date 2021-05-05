@@ -1,28 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from "@angular/router";
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {FirebaseService} from "../../services/firebase.service";
+import {Router} from "@angular/router";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']
+  selector: 'app-forgot-password',
+  templateUrl: './forgot-password.component.html',
+  styleUrls: ['./forgot-password.component.css']
 })
-export class AuthComponent implements OnInit {
+export class ForgotPasswordComponent implements OnInit {
   form:FormGroup;
-  hide=true;
+
   constructor(
-    private formBuilder:FormBuilder,
+    public firebaseService:FirebaseService,
     private router:Router,
+    private formBuilder:FormBuilder,
     private snackBar:MatSnackBar,
-    public firebaseService:FirebaseService
+
   ) {
     this.form = this.formBuilder.group({
       email: new FormControl('',[Validators.required, Validators.email]),
-      password: new FormControl('',[Validators.required])
     })
-
   }
 
   ngOnInit(): void {
@@ -39,11 +38,12 @@ export class AuthComponent implements OnInit {
 
   submitForm(){
     if(this.form.valid){
-      this.firebaseService.signIn(this.form.value.email, this.form.value.password);
+      this.firebaseService.forgotPassword(this.form.value.email);
       this.router.navigate(['../home']);
     }
     else{
-      this.openSnackBar("Unable to log in !","Ok");
+      this.openSnackBar("Enter an email !","Ok");
     }
   }
+
 }
