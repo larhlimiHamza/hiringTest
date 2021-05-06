@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from "../components/auth/auth.component";
-import { FooterComponent } from '../components/footer/footer.component';
-import { HeaderComponent } from '../components/header/header.component';
 import {RegisterComponent} from "../components/register/register.component";
 import {HomeComponent} from "../components/home/home.component";
 import {AuthGuard} from "../guards/auth.guard";
 import {ForgotPasswordComponent} from "../components/forgot-password/forgot-password.component";
+import {RedirectionGuard} from "../guards/redirection.guard";
 
 const routes: Routes = [
   {
@@ -22,14 +21,18 @@ const routes: Routes = [
   {
     path:'auth',
     component:AuthComponent,
+    canActivate: [RedirectionGuard],
   },
   {
     path:'sign_up',
     component:RegisterComponent,
+    canActivate: [RedirectionGuard],
+
   },
   {
     path:'forgot_password',
-    component:ForgotPasswordComponent
+    component:ForgotPasswordComponent,
+    canActivate: [RedirectionGuard],
   }
 
 ]

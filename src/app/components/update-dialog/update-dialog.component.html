@@ -1,0 +1,15 @@
+
+<form [formGroup]="form" (ngSubmit)="submitForm()">
+
+  <p>Change status for : {{data.doc.docID}}</p>
+  <mat-form-field class="full-width">
+    <mat-label>Status for document: {{data.doc.docID}}</mat-label>
+    <input type="number" matInput [formControlName]="'status'" [placeholder]="data.doc.status">
+    <mat-error *ngIf="form.get('status').hasError('required')">
+    Status is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <button mat-raised-button type="submit" [disabled]="!form.valid" color="primary">Update status</button>
+
+</form>
+

@@ -26,21 +26,20 @@ export class AuthComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.firebaseService.isLoggedIn()){
-      this.router.navigate(['../home']);
-    }
   }
   openSnackBar(message:string, action:string){
     this.snackBar.open(message,action,{
       duration:2000,
       verticalPosition:'top',
+      panelClass:['mat-toolbar','mat-warn']
     });
   }
 
   submitForm(){
     if(this.form.valid){
-      this.firebaseService.signIn(this.form.value.email, this.form.value.password);
-      this.router.navigate(['../home']);
+      this.firebaseService.signIn(this.form.value.email, this.form.value.password).then(()=>{
+        this.router.navigate(['../home']);
+      });
     }
     else{
       this.openSnackBar("Unable to log in !","Ok");

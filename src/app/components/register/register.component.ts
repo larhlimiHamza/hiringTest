@@ -30,14 +30,12 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.firebaseService.isLoggedIn()){
-      this.router.navigate(['../home']);
-    }
   }
   openSnackBar(message:string, action:string){
     this.snackBar.open(message,action,{
       duration:2000,
       verticalPosition:'top',
+      panelClass:['mat-toolbar','mat-warn']
     });
   }
   submitForm(){

@@ -44,13 +44,14 @@ export class FirebaseService {
 
   signOut() {
     return this.angularFireAuth.signOut().then(() => {
-      localStorage.removeItem("ngUser");
-      this.router.navigate(['']);
+      localStorage.removeItem('ngUser');
+      this.router.navigate(['../']);
     })
   }
   signIn(email, password) {
     return this.angularFireAuth.signInWithEmailAndPassword(email, password)
       .then((res) => {
+        this.setUserData(res);
         this.router.navigate(['../home']);
       })
       .catch((err) => {
@@ -62,6 +63,7 @@ export class FirebaseService {
     return this.angularFireAuth.createUserWithEmailAndPassword(email, password)
       .then((res) => {
         this.openSnackBar("Account created successfully",'');
+        this.setUserData(res);
         this.router.navigate(['../home']);
       }).catch((err) => {
         this.openSnackBar(err,""); //TODO Handle errors
@@ -74,9 +76,9 @@ export class FirebaseService {
 
   authLogin(provider) {
     return this.angularFireAuth.signInWithPopup(provider)
-      .then((result) => {
-        //TODO Fix redirect issue
-          this.router.navigate(['../home']);
+      .then((res) => {
+        this.setUserData(res);
+        this.router.navigate(['../home']);
       })
       .catch((error) => {
         window.alert(error)
@@ -89,5 +91,9 @@ export class FirebaseService {
       }).catch((err) => {
         this.openSnackBar(err,"");
       })
+  }
+  setUserData(user){
+    localStorage.setItem('ngUser', JSON.stringify(user));
+    JSON.parse(localStorage.getItem('ngUser'));
   }
 }

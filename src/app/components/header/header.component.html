@@ -3,7 +3,7 @@
     <mat-icon>home</mat-icon>
   </button>
   <div style="margin-left: auto;">
-  <div  *ngIf="!isLogged;else sign_out">
+  <div  *ngIf="!firebaseService.isLoggedIn();else sign_out">
     <a mat-button [routerLink]="['../auth']" color="primary">Sign in</a>
     <a mat-button [routerLink]="['../sign_up']" color="accent">Sign up</a>
   </div>

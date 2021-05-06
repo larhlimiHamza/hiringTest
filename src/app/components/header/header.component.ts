@@ -7,13 +7,11 @@ import {FirebaseService} from "../../services/firebase.service";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  isLogged=false;
   constructor(
     public  firebaseService:FirebaseService
   ) { }
 
   ngOnInit(): void {
-    this.isLogged = this.firebaseService.isLoggedIn();
   }
 
 }

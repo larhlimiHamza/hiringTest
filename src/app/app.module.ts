@@ -17,6 +17,7 @@ import { RegisterComponent } from './components/register/register.component';
 import {FirebaseService} from "./services/firebase.service";
 import { HomeComponent } from './components/home/home.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { UpdateDialogComponent } from './components/update-dialog/update-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     RegisterComponent,
     HomeComponent,
     ForgotPasswordComponent,
+    UpdateDialogComponent,
 
   ],
   imports: [
@@ -49,5 +51,6 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
   ],
   providers: [FirebaseService],
   bootstrap: [AppComponent],
+  entryComponents :[UpdateDialogComponent]
 })
 export class AppModule { }
